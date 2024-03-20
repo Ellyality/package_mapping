@@ -1,0 +1,21 @@
+{
+	"name": "com.ellyality.visual.mapping",
+	"displayName":"Mapping Tool",
+	"version": "1.0.0",
+    "author": "Elly",
+    "unity": "2019.2",
+    "keywords": ["display", "projection", "projector", "calibration"],
+    "category": "engineering",
+    "license": "LICENSE",
+	"description": "",
+    "documentationUrl": "https://github.com/Ellyality/package_randomness/blob/main/README.md",
+    "samples":[
+        {
+            "displayName": "Demo Scene",
+            "description": "All the noise display scene",
+            "path": "Demo/Scenes"
+        }
+    ],
+    "dependencies": {
+    }
+}
