@@ -1,18 +1,44 @@
-using System.Collections;
+using NaughtyAttributes;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class ProjectionMapping : MonoBehaviour
+namespace Ellyality.Mapping
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    public class ProjectionMapping : MonoBehaviour, IProjectionMapping
     {
-        
+        #region Field
+        [SerializeField] SceneMapping sceneManager;
+        [SerializeField] RectTransform cameraFeeds;
+        [SerializeField] public RenderTexture[] UseTextures = new RenderTexture[0];
+        #endregion
+
+        #region Public Property
+        public List<RawImage> rawImages { set; get; } = new List<RawImage>();
+        #endregion
+
+        [Button]
+        public void UpdateCameraFeeds()
+        {
+            while(cameraFeeds.childCount > 0)
+            {
+                if (Application.isEditor) DestroyImmediate(cameraFeeds.GetChild(0).gameObject);
+                else Destroy(cameraFeeds.GetChild(0).gameObject);
+            }
+
+            int c = sceneManager.rts.Count;
+            for(int i = 0; i < c; i++)
+            {
+                GameObject g = new GameObject($"rt {i}");
+                RawImage ri = g.AddComponent<RawImage>();
+                AspectRatioFitter arf = g.AddComponent<AspectRatioFitter>();
+                arf.aspectRatio = (float)sceneManager.res.x / (float)sceneManager.res.y;
+                ri.texture = sceneManager.rts[i];
+                g.transform.SetParent(cameraFeeds);
+            }
+
+            cameraFeeds.ForceUpdateRectTransforms();
+        }
     }
 }
