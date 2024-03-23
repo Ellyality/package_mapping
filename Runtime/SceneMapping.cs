@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Ellyality.Mapping
 {
-
+    [AddComponentMenu("Ellyality/Mapping/Scene")]
     public class SceneMapping : MonoBehaviour, ISceneMapping
     {
         #region Field
